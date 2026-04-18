@@ -24,3 +24,6 @@ export * from "./pipeline/index";
 
 // Charts & Comparisons
 export * from "./charts/index";
+
+// Annotations
+export * from "./annotation/index";
