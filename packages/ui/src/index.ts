@@ -9,3 +9,6 @@ export * from "./typography/Typography";
 
 // Icons
 export * from "./icons/index";
+
+// Arrows & Connectors
+export * from "./arrows/index";

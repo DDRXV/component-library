@@ -5,22 +5,27 @@ import { toHaveNoViolations } from "jest-axe";
 expect.extend(toHaveNoViolations);
 
 // Suppress GSAP warnings in tests
+const mockTween = { kill: vi.fn(), pause: vi.fn(), play: vi.fn() };
+const mockTimeline = () => ({
+  to: vi.fn().mockReturnThis(),
+  from: vi.fn().mockReturnThis(),
+  fromTo: vi.fn().mockReturnThis(),
+  set: vi.fn().mockReturnThis(),
+  play: vi.fn().mockReturnThis(),
+  pause: vi.fn().mockReturnThis(),
+  kill: vi.fn().mockReturnThis(),
+  repeat: vi.fn().mockReturnThis(),
+});
+
 vi.mock("gsap", () => ({
   default: {
-    to: vi.fn(),
-    from: vi.fn(),
-    fromTo: vi.fn(),
-    set: vi.fn(),
-    timeline: vi.fn(() => ({
-      to: vi.fn().mockReturnThis(),
-      from: vi.fn().mockReturnThis(),
-      fromTo: vi.fn().mockReturnThis(),
-      set: vi.fn().mockReturnThis(),
-      play: vi.fn().mockReturnThis(),
-      pause: vi.fn().mockReturnThis(),
-      kill: vi.fn().mockReturnThis(),
-    })),
+    to: vi.fn(() => mockTween),
+    from: vi.fn(() => mockTween),
+    fromTo: vi.fn(() => mockTween),
+    set: vi.fn(() => mockTween),
+    killTweensOf: vi.fn(),
     registerPlugin: vi.fn(),
+    timeline: vi.fn(mockTimeline),
     matchMedia: vi.fn(() => ({
       add: vi.fn(),
       revert: vi.fn(),
@@ -28,14 +33,11 @@ vi.mock("gsap", () => ({
     })),
   },
   gsap: {
-    to: vi.fn(),
-    from: vi.fn(),
-    fromTo: vi.fn(),
+    to: vi.fn(() => mockTween),
+    from: vi.fn(() => mockTween),
     set: vi.fn(),
-    timeline: vi.fn(() => ({
-      to: vi.fn().mockReturnThis(),
-      from: vi.fn().mockReturnThis(),
-    })),
+    killTweensOf: vi.fn(),
+    timeline: vi.fn(mockTimeline),
   },
 }));
 
