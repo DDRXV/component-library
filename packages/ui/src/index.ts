@@ -21,3 +21,6 @@ export * from "./llm/index";
 
 // ML Pipeline
 export * from "./pipeline/index";
+
+// Charts & Comparisons
+export * from "./charts/index";
