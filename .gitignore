@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env*
+.DS_Store
+*.log
+coverage/
+.turbo/
+.next/
+out/
+build/
+storybook-static/
+*.tsbuildinfo
