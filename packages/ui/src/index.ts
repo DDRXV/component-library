@@ -12,3 +12,6 @@ export * from "./icons/index";
 
 // Arrows & Connectors
 export * from "./arrows/index";
+
+// Neural Network
+export * from "./neural/index";
